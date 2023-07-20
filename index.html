@@ -5,7 +5,7 @@
 </head>
 <body>
   <h1>Enter Your Details:</h1>
-  <form action="https://script.google.com/macros/s/AKfycbxuIA2_DhU7vn01phfqjEoDoBnmuilJKefB-HjrVO6R8dngmNv9N-6c_Jn7EZkw3pnHsw/exec" method="post">
+  <form id="userForm" onsubmit="return validateForm()" action="https://script.google.com/macros/s/AKfycbxuIA2_DhU7vn01phfqjEoDoBnmuilJKefB-HjrVO6R8dngmNv9N-6c_Jn7EZkw3pnHsw/exec" method="post">
     <label for="name">Name:</label>
     <input type="text" id="name" name="name" required>
     <br>
@@ -14,5 +14,34 @@
     <br>
     <button type="submit">Submit</button>
   </form>
+
+  <script>
+    function validateForm() {
+      const nameInput = document.getElementById("name");
+      const mobileInput = document.getElementById("mobile");
+
+      // Regular expression to check if the name contains only letters and spaces
+      const nameRegex = /^[A-Za-z\s]+$/;
+      // Regular expression to check if the mobile number has exactly 10 digits
+      const mobileRegex = /^\d{10}$/;
+
+      // Check if the name contains only letters and spaces
+      if (!nameRegex.test(nameInput.value)) {
+        alert("Please enter a valid name (letters only).");
+        nameInput.focus();
+        return false;
+      }
+
+      // Check if the mobile number has exactly 10 digits
+      if (!mobileRegex.test(mobileInput.value)) {
+        alert("Please enter a valid 10-digit mobile number.");
+        mobileInput.focus();
+        return false;
+      }
+
+      // Form is valid, allow submission
+      return true;
+    }
+  </script>
 </body>
 </html>
